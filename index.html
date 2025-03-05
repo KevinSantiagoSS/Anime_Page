@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Página</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Encabezado con botones de navegación -->
+    <header>
+        <button class="nav-btn" onclick="mostrarSeccion('inicio')">INICIO</button>
+        <button class="nav-btn" onclick="mostrarSeccion('visto')">VISTO</button>
+        <button class="nav-btn" onclick="mostrarSeccion('no-visto')">NO VISTO</button>
+    </header>
+
+    <!-- Secciones de contenido -->
+    <div id="inicio" class="seccion">
+        <h2></h2>
+        <div class="form-container">
+            <h2>Agregar Anime</h2>
+            <form id="animeForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre del Anime</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="imagen_url">URL de la Imagen</label> <!-- ⬅️ Corregido -->
+                    <input type="text" id="imagen_url" name="imagen_url" required> <!-- ⬅️ Corregido -->
+                </div>
+                <div class="form-group">
+                    <label for="capitulos">Número de Capítulos</label>
+                    <input type="number" id="capitulos" name="capitulos" required>
+                </div>
+                <div class="form-group">
+                    <label for="anio_emision">Año de Emisión</label> <!-- ⬅️ Corregido -->
+                    <input type="number" id="anio_emision" name="anio_emision" required> <!-- ⬅️ Corregido -->
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <select id="estado" name="estado" required>
+                        <option value="NO VISTO">NO VISTO</option>
+                        <option value="VISTO">VISTO</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Agregar Anime</button>
+            </form>            
+        </div>        
+        <div id="inicio-animes"></div>
+    </div>
+
+    <div id="visto" class="seccion">
+        <h2></h2>
+        <div id="visto-animes"></div>
+    </div>
+
+    <div id="no-visto" class="seccion">
+        <h2></h2>
+        <div id="no-visto-animes"></div>
+    </div>
+
+    <script src="script.js" defer></script>
+
+</body>
+</html>

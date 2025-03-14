@@ -9,10 +9,10 @@ app.use(cors());
 
 // Configurar conexión a MySQL (una sola vez)
 const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: "anime"
+    host: process.env.MYSQLHOST,  // Usa el nombre que da Railway
+    user: process.env.MYSQLUSER,  // Cambia si en Railway es diferente
+    password: process.env.MYSQLPASSWORD,  // Cambia si en Railway es diferente
+    database: process.env.MYSQLDATABASE
 });
 
 db.connect(err => {

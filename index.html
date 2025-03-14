@@ -13,6 +13,8 @@
         <button class="nav-btn" onclick="mostrarSeccion('inicio')">INICIO</button>
         <button class="nav-btn" onclick="mostrarSeccion('visto')">VISTO</button>
         <button class="nav-btn" onclick="mostrarSeccion('no-visto')">NO VISTO</button>
+        <button class="nav-btn" onclick="mostrarSeccion('abecedario')">ABC</button>
+        <button class="nav-btn" onclick="mostrarSeccion('seccion-ruleta')">RANDOM</button>
     </header>
 
     <!-- Secciones de contenido -->
@@ -59,6 +61,31 @@
         <h2></h2>
         <div id="no-visto-animes"></div>
     </div>
+
+    <div id="abecedario" class="seccion">
+        <h2>Lista de Animes</h2>
+        <div class="abecedario-container">
+            <aside class="letras-sidebar">
+                <!-- Letras de la A a la Z generadas dinámicamente con JS -->
+            </aside>
+            <div id="abecedario-animes"></div>
+        </div>
+    </div>
+
+    <div id="seccion-ruleta" class="seccion">
+        <h2>Ruleta de Animes</h2>
+        
+        <div class="ruleta-container">
+            <div class="ruleta-wrapper">
+                <div class="flecha"></div>
+                <div id="ruleta-box"></div>
+            </div>
+            
+            <button id="girarRuleta">Girar Ruleta</button>
+        </div>
+    
+        <div id="resultado-ruleta"></div>
+    </div>    
 
     <script src="script.js" defer></script>
 

@@ -27,6 +27,32 @@ module.exports = (db) => {
         }
     });
 
+    //Obtiene todos los animes de manera ordenada alfabeticamente
+    router.get("/animes/ordenados", (req, res) => {
+        console.log("📢 Se recibió una solicitud en /ordenados"); // <--- Agrega esto
+        
+        db.query("SELECT * FROM animes ORDER BY nombre ASC", (err, results) => {
+            if (err) {
+                console.error("❌ Error al obtener animes ordenados:", err);
+                return res.status(500).json({ error: "Error al obtener animes" });
+            }
+    
+            console.log("✅ Animes obtenidos:", results.length); // <--- Ver cuántos animes hay
+            res.json(results);
+        });
+    });
+
+    //Obtiene los animes de la sección No Visto
+    router.get("/animes/no-visto", (req, res) => {
+        db.query("SELECT * FROM animes WHERE estado = 'NO VISTO'", (err, results) => {
+            if (err) {
+                console.error("❌ Error al obtener animes NO VISTO:", err);
+                return res.status(500).json({ error: "Error al obtener animes" });
+            }
+            res.json(results);
+        });
+    });    
+
     // Agregar un anime nuevo
     router.post('/animes', async (req, res) => {
         console.log("📢 [POST] Se recibió una solicitud para agregar un anime en:", new Date().toISOString());

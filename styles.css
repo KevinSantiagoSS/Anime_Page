@@ -126,7 +126,9 @@ header {
 /* Asegurar que las secciones donde se muestran los animes estén alineadas horizontalmente */
 #inicio-animes,
 #visto-animes,
-#no-visto-animes {
+#no-visto-animes,
+#abecedario-animes,
+#resultado-anime {
     display: flex;
     flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea si no caben */
     justify-content: center; /* Centra los elementos horizontalmente */
@@ -188,7 +190,7 @@ header {
 .anime-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill; /* Ajusta la imagen sin recortarla */
     border-radius: 10px;
 }
 
@@ -228,3 +230,134 @@ header {
     opacity: 1;
     transform: translateY(-80px); /* Se desplaza hacia arriba */
 }
+
+.abecedario-container {
+    display: flex;
+}
+
+.letras-sidebar {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    position: sticky;
+    top: 10px;
+}
+
+.letra-btn {
+    background: #444;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.letra-btn:hover {
+    background: #ff4500;
+}
+
+.anime-lista {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.anime-imagen {
+    width: 50px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.anime-nombre {
+    font-size: 18px;
+}
+
+
+/* Sección de la ruleta */
+#seccion-ruleta {
+    display: none; /* Se oculta por defecto y se muestra con JS */
+    text-align: center;
+    padding: 20px;
+}
+
+#seccion-ruleta h2 {
+    margin-bottom: 20px; /* Agrega espacio debajo del título */
+    text-align: center; /* Asegura que el título esté centrado */
+}
+
+/* Contenedor de la ruleta */
+.ruleta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Ruleta */
+#ruleta-box {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid white;
+    transition: transform 3s ease-out;
+}
+
+/* Flecha */
+.flecha {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid white;
+}
+
+.anime-imagen-seleccionado {
+    max-width: 200px;  /* Ancho máximo */
+    max-height: 200px; /* Altura máxima */
+    width: auto;       /* Mantiene la proporción */
+    height: auto;      /* Mantiene la proporción */
+    border-radius: 10px; /* Bordes redondeados */
+    display: block;
+    margin: 10px auto; /* Centrar la imagen */
+}
+
+#girarRuleta {
+    margin-top: 20px; /* Espaciado superior */
+    padding: 12px 25px; /* Tamaño del botón */
+    font-size: 20px; /* Tamaño del texto */
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background: linear-gradient(45deg, #ff8c00, #ff4500); /* Degradado naranja-rojo */
+    transition: all 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 4px 10px rgba(255, 69, 0, 0.4); /* Sombra suave */
+}
+
+#girarRuleta:hover {
+    background: linear-gradient(45deg, #ff4500, #ff0000); /* Cambia a un degradado más intenso */
+    transform: scale(1.05); /* Aumenta un poco de tamaño */
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.5); /* Brillo más fuerte */
+}
+
+#girarRuleta:active {
+    transform: scale(0.95); /* Efecto de clic */
+}
+
+/* Resultado */
+#resultado-ruleta {
+    display: none;
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+}
+

@@ -1,0 +1,8 @@
+# Ignorar archivo de configuración
+.env
+
+# Ignorar node_modules (carpeta pesada)
+node_modules/
+
+# Ignorar logs
+*.log

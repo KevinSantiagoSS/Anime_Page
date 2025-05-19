@@ -21,9 +21,16 @@ const animeRoutes = require('./routes/animes')(pool);
 app.use('/api', animeRoutes);
 
 // Ruta de prueba
-app.get('/', (req, res) => {
-    res.send('Servidor funcionando 🚀');
+const path = require('path');
+
+// Servir archivos estáticos desde /public
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Para cualquier ruta no reconocida, devolver index.html (SPA)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 
 // Iniciar servidor
 const PORT = 4000;

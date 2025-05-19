@@ -9,11 +9,14 @@ app.use(cors());
 
 // Configurar conexión a MySQL con pool de conexiones
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'RIOLkelu01.',
-    database: 'anime',
-    port: 3306
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 // Importar rutas y pasar el pool de conexiones

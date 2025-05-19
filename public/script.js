@@ -11,7 +11,7 @@ function mostrarSeccion(seccionId) {
 }
 
 function cargarAnimes() {
-    fetch("http://localhost:4000/api/animes")
+    fetch("https://animepage-production.up.railway.app/api/animes")
         .then(response => response.json())
         .then(animes => actualizarSecciones(animes))
         .catch(error => console.error("Error al cargar animes:", error));
@@ -57,7 +57,7 @@ function cambiarEstado(id, estadoActual) {
 
     const nuevoEstado = estadoActual === "VISTO" ? "NO VISTO" : "VISTO";
 
-    fetch(`http://localhost:4000/api/animes/${id}`, {
+    fetch(`https://animepage-production.up.railway.app/api/animes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ estado: nuevoEstado })
@@ -85,7 +85,7 @@ animeForm.addEventListener("submit", function(event) {
         estado: document.getElementById("estado").value
     };
 
-    const url = animeId ? `http://localhost:4000/api/animes/${animeId}` : "http://localhost:4000/api/animes";
+    const url = animeId ? `https://animepage-production.up.railway.app/api/animes/${animeId}` : "https://animepage-production.up.railway.app/api/animes";
     const method = animeId ? "PUT" : "POST";
 
     fetch(url, {
@@ -113,7 +113,7 @@ document.getElementById("nombre").addEventListener("keypress", function(event) {
 function buscarAnimePorNombre(nombre) {
     if (!nombre) return;
     
-    fetch(`http://localhost:4000/api/animes?nombre=${encodeURIComponent(nombre)}`)
+    fetch(`https://animepage-production.up.railway.app/api/animes?nombre=${encodeURIComponent(nombre)}`)
         .then(response => response.json())
         .then(data => {
             if (!data.length) {
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
 async function obtenerAnimesOrdenados() {
     try {
         console.log("📢 Enviando solicitud a la API...");
-        let response = await fetch("http://localhost:4000/api/animes/ordenados");
+        let response = await fetch("https://animepage-production.up.railway.app/api/animes/ordenados");
 
         console.log("✅ Respuesta recibida:", response);
 
@@ -294,7 +294,7 @@ async function girarRuleta() {
 
 async function obtenerAnimeAleatorio() {
     try {
-        let response = await fetch("http://localhost:4000/api/animes/no-visto");
+        let response = await fetch("https://animepage-production.up.railway.app/api/animes/no-visto");
         let animes = await response.json();
 
         if (animes.length === 0) {

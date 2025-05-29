@@ -235,46 +235,57 @@ header {
     display: flex;
 }
 
-.letras-sidebar {
-    width: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    position: sticky;
-    top: 10px;
+/* Fija la barra de letras justo debajo del header */
+.letras-navbar {
+  position: fixed;
+  top: 55px; /* Ajusta según el alto de tu header */
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 8px;
+  z-index: 999;
 }
 
-.letra-btn {
-    background: #444;
-    color: white;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+/* Estilo para los botones de letras */
+.letra-boton {
+  margin: 0 3px; /* Espacio entre botones */
+  padding: 6px 12px; /* Tamaño interior del botón (alto y ancho) */
+  background-color: #f01919; /* Color de fondo del botón */
+  color: white; /* Color de la letra */
+  border: none;
+  border-radius: 8px; /* Bordes redondeados */
+  font-weight: bold; /* Letra en negrita */
+  font-size: 12px; /* Tamaño de la letra */
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.letra-btn:hover {
-    background: #ff4500;
+.letra-boton:hover {
+  background-color: #c0392b; /* Color de fondo al pasar el mouse */
+  color: #f0f0f0; /* Color de la letra al pasar el mouse (opcional) */
 }
 
 .anime-lista {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     padding: 10px;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
 }
 
 .anime-imagen {
-    width: 50px;
-    height: 75px;
-    object-fit: cover;
+    width: 80px;
+    height: auto;
     border-radius: 5px;
+    object-fit: cover;
 }
 
 .anime-nombre {
-    font-size: 18px;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 

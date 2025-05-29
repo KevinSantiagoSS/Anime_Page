@@ -206,12 +206,12 @@ function desplazarALetra(letra) {
 
 function generarAbecedario() {
     const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const contenedor = document.querySelector(".letras-sidebar");
+    const contenedor = document.querySelector(".letras-navbar"); // Cambiado de letras-sidebar
 
     letras.split("").forEach(letra => {
         let boton = document.createElement("button");
         boton.textContent = letra;
-        boton.classList.add("letra-boton"); // Puedes personalizar este estilo en CSS
+        boton.classList.add("letra-boton");
         boton.addEventListener("click", () => desplazarALetra(letra));
         contenedor.appendChild(boton);
     });

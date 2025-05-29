@@ -152,26 +152,10 @@ function limpiarFormulario() {
     document.querySelector(".submit-btn").textContent = "Agregar Anime";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const letrasSidebar = document.querySelector(".letras-sidebar");
-
-    // Crear las letras A-Z dinámicamente
-    for (let i = 65; i <= 90; i++) {
-        let letra = String.fromCharCode(i); // Convertimos código ASCII en letra
-        let btn = document.createElement("button");
-        btn.textContent = letra;
-        btn.classList.add("letra-btn");
-        btn.setAttribute("data-letra", letra);
-        btn.addEventListener("click", () => desplazarALetra(letra));
-        letrasSidebar.appendChild(btn);
-    }
-});
-
 async function obtenerAnimesOrdenados() {
     try {
         console.log("📢 Enviando solicitud a la API...");
         let response = await fetch("https://animepage-production.up.railway.app/api/animes/ordenados");
-
         console.log("✅ Respuesta recibida:", response);
 
         let animes = await response.json();
@@ -183,10 +167,9 @@ async function obtenerAnimesOrdenados() {
     }
 }
 
-
 function mostrarAnimes(animes) {
     const contenedor = document.getElementById("abecedario-animes");
-    contenedor.innerHTML = ""; // Limpiar antes de agregar contenido
+    contenedor.innerHTML = "";
 
     animes.forEach(anime => {
         let animeDiv = document.createElement("div");
@@ -196,8 +179,7 @@ function mostrarAnimes(animes) {
         imagen.src = anime.imagen_url;
         imagen.alt = anime.nombre;
         imagen.classList.add("anime-imagen");
-        
-        // Si el anime está en "VISTO", se aplica filtro de opacidad
+
         if (anime.estado === "VISTO") {
             imagen.style.filter = "blur(2px) brightness(0.7)";
         }
@@ -215,14 +197,31 @@ function mostrarAnimes(animes) {
 function desplazarALetra(letra) {
     let animes = document.querySelectorAll(".anime-lista");
     for (let anime of animes) {
-        if (anime.textContent.trim().startsWith(letra)) {
+        if (anime.textContent.trim().toUpperCase().startsWith(letra.toUpperCase())) {
             anime.scrollIntoView({ behavior: "smooth", block: "start" });
             break;
         }
     }
 }
 
-document.addEventListener("DOMContentLoaded", obtenerAnimesOrdenados);
+function generarAbecedario() {
+    const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const contenedor = document.querySelector(".letras-sidebar");
+
+    letras.split("").forEach(letra => {
+        let boton = document.createElement("button");
+        boton.textContent = letra;
+        boton.classList.add("letra-boton"); // Puedes personalizar este estilo en CSS
+        boton.addEventListener("click", () => desplazarALetra(letra));
+        contenedor.appendChild(boton);
+    });
+}
+
+// Inicialización al cargar
+document.addEventListener("DOMContentLoaded", () => {
+    obtenerAnimesOrdenados();
+    generarAbecedario();
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     // Vincular el botón de girar con la función

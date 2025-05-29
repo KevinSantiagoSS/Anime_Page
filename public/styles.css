@@ -17,7 +17,8 @@ header {
     background-color: #333;
     padding: 15px 0;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Espacia botones a la izquierda y buscador a la derecha */
+    flex-wrap: wrap; /* Para que en pantallas pequeñas no se rompa */
     gap: 20px;
     position: sticky;
     top: 0;
@@ -374,46 +375,67 @@ header {
     color: white;
 }
 
-
-/*SECCION DE BUSCADOR LIVE*/
+/* Buscador dentro del header */
 .buscador-container {
+    display: flex;
+    flex-direction: column;
     position: relative;
-    margin-left: auto;
 }
 
+.buscador-container input {
+    padding: 6px 10px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    min-width: 200px;
+}
+
+/* Estilo para los resultados debajo del buscador */
 .resultados-buscador {
-    position: absolute;
-    top: 38px;
-    right: 0;
-    background-color: white;
-    border-radius: 8px;
-    max-height: 300px;
-    overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    width: 250px;
-    z-index: 999;
     list-style: none;
-    padding: 0;
     margin: 0;
-    display: none;
+    padding: 5px 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ffffff;
+    width: 100%;
+    z-index: 10;
+    display: none; /* puedes activar dinámicamente desde JS */
 }
 
 .resultados-buscador li {
     display: flex;
     align-items: center;
-    padding: 8px;
-    border-bottom: 1px solid #eee;
+    gap: 10px;
+    padding: 5px 10px;
     cursor: pointer;
+    color:#000000;
 }
 
 .resultados-buscador li img {
-    width: 40px;
-    height: 60px;
-    object-fit: cover;
-    margin-right: 10px;
-    border-radius: 4px;
+    width: 50px;        /* Ajusta este valor según el tamaño que prefieras */
+    height: auto;       /* O usa height: 50px para hacerla cuadrada */
+    border-radius: 5px; /* Opcional: esquinas redondeadas */
+    object-fit: cover;  /* Para que no se deformen las imágenes */
 }
 
 .resultados-buscador li:hover {
     background-color: #f0f0f0;
+}
+
+@media screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .buscador-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .buscador-container input {
+        width: 100%;
+    }
 }

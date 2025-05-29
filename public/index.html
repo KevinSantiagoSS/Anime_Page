@@ -16,6 +16,10 @@
         <button class="nav-btn" onclick="mostrarSeccion('no-visto')">NO VISTO</button>
         <button class="nav-btn" onclick="mostrarSeccion('abecedario')">ABC</button>
         <button class="nav-btn" onclick="mostrarSeccion('seccion-ruleta')">RANDOM</button>
+            <div class="buscador-container">
+                <input type="text" id="buscador-anime" placeholder="Buscar anime...">
+                <ul id="resultados-buscador" class="resultados-buscador"></ul>
+            </div>
     </header>
 
     <!-- Secciones de contenido -->
@@ -87,11 +91,6 @@
     
         <div id="resultado-ruleta"></div>
     </div>    
-
-    <div class="buscador-container">
-        <input type="text" id="buscador-anime" placeholder="Buscar anime...">
-        <ul id="resultados-buscador" class="resultados-buscador"></ul>
-    </div>
 
     <script src="script.js" defer></script>
 

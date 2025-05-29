@@ -315,6 +315,7 @@ function mostrarAnimeSeleccionado(anime) {
     resultadoDiv.innerHTML = `
         <h3>${anime.nombre}</h3>
         <img src="${anime.imagen_url}" alt="${anime.nombre}" class="anime-imagen-seleccionado">
+        <h3>${anime.capitulos}</h3>
     `;
     resultadoDiv.style.display = "block";
 }

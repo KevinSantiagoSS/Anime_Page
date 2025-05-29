@@ -240,7 +240,7 @@ header {
 /* Fija la barra de letras justo debajo del header */
 .letras-navbar {
   position: fixed;
-  margin-top: 20px;
+  margin-top: 40px;
   top: 55px; /* Ajusta según el alto de tu header */
   width: 100%;
   background-color: #333;

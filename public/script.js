@@ -152,6 +152,8 @@ function limpiarFormulario() {
     document.querySelector(".submit-btn").textContent = "Agregar Anime";
 }
 
+let todosLosAnimes = [];
+
 async function obtenerAnimesOrdenados() {
     try {
         console.log("📢 Enviando solicitud a la API...");
@@ -160,7 +162,7 @@ async function obtenerAnimesOrdenados() {
 
         let animes = await response.json();
         console.log("📄 Datos obtenidos:", animes);
-
+        todosLosAnimes = animes;
         mostrarAnimes(animes);
     } catch (error) {
         console.error("❌ Error al obtener animes:", error);
@@ -316,3 +318,52 @@ function mostrarAnimeSeleccionado(anime) {
     `;
     resultadoDiv.style.display = "block";
 }
+
+/*Document que permite la busqueda*/
+document.getElementById("buscador-anime").addEventListener("input", function () {
+    const termino = this.value.toLowerCase();
+    const resultados = document.getElementById("resultados-buscador");
+
+    resultados.innerHTML = "";
+
+    if (termino === "") {
+        resultados.style.display = "none";
+        return;
+    }
+
+    const coincidencias = todosLosAnimes.filter(anime => anime.nombre.toLowerCase().includes(termino));
+
+    if (coincidencias.length > 0) {
+        coincidencias.slice(0, 5).forEach(anime => {
+            const li = document.createElement("li");
+
+            const img = document.createElement("img");
+            img.src = anime.imagen_url;
+            img.alt = anime.nombre;
+
+            const nombre = document.createElement("span");
+            nombre.textContent = anime.nombre;
+
+            li.appendChild(img);
+            li.appendChild(nombre);
+
+            li.addEventListener("click", () => {
+                document.getElementById("buscador-anime").value = anime.nombre;
+                resultados.style.display = "none";
+                // Opcional: desplazar hacia el anime o mostrar su info
+            });
+
+            resultados.appendChild(li);
+        });
+
+        resultados.style.display = "block";
+    } else {
+        resultados.style.display = "none";
+    }
+});
+
+document.addEventListener("click", function (e) {
+    if (!e.target.closest(".buscador-container")) {
+        document.getElementById("resultados-buscador").style.display = "none";
+    }
+});

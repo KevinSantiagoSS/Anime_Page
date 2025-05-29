@@ -128,6 +128,7 @@ header {
 #visto-animes,
 #no-visto-animes,
 #abecedario-animes,
+#buscador-anime,
 #resultado-anime {
     display: flex;
     flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea si no caben */
@@ -371,4 +372,48 @@ header {
     font-size: 1.2em;
     font-weight: bold;
     color: white;
+}
+
+
+/*SECCION DE BUSCADOR LIVE*/
+.buscador-container {
+    position: relative;
+    margin-left: auto;
+}
+
+.resultados-buscador {
+    position: absolute;
+    top: 38px;
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: 250px;
+    z-index: 999;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.resultados-buscador li {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.resultados-buscador li img {
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.resultados-buscador li:hover {
+    background-color: #f0f0f0;
 }

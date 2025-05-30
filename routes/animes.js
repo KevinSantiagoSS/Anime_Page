@@ -1,39 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 
 module.exports = (pool) => {
-
-    // 🔍 Buscar sinopsis desde Jikan
-    async function buscarSinopsis(nombre) {
-        try {
-            const res = await axios.get(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(nombre)}&limit=1`);
-            const anime = res.data.data[0];
-            return anime?.synopsis || null;
-        } catch (err) {
-            console.error('❌ Error buscando sinopsis:', err.message);
-            return null;
-        }
-    }
-
-    // 🌐 Traducir sinopsis al español
-    async function traducirSinopsis(texto) {
-        try {
-            const res = await axios.post('https://libretranslate.de/translate', {
-                q: texto,
-                source: 'en',
-                target: 'es',
-                format: 'text'
-            }, {
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            return res.data.translatedText;
-        } catch (err) {
-            console.error('❌ Error al traducir la sinopsis:', err.message);
-            return texto; // Si falla, se deja en inglés
-        }
-    }
 
     // 🟢 Obtener todos los animes o buscar por nombre
     router.get('/animes', async (req, res) => {
@@ -87,34 +55,27 @@ module.exports = (pool) => {
 
     // 🟢 Agregar un anime nuevo
     router.post('/animes', async (req, res) => {
-    const { nombre, imagen_url, capitulos, anio_emision, sinopsis, estado } = req.body;
+        console.log("📢 [POST] Agregando un anime:", new Date().toISOString());
+        
+        const { nombre, imagen_url, capitulos, anio_emision, sinopsis, estado } = req.body;
 
-    // Validar solo campos obligatorios excepto sinopsis
-    if (!nombre || !imagen_url || !capitulos || !anio_emision || !estado) {
-        return res.status(400).json({ error: "Faltan campos obligatorios" });
-    }
-
-    try {
-        let sinopsisFinal = sinopsis?.trim();
-
-        if (!sinopsisFinal) {
-            // Aquí llamas a la función que trae la sinopsis y la traduce
-            const sinopsisEnIngles = await buscarSinopsis(nombre);
-            sinopsisFinal = sinopsisEnIngles ? await traducirSinopsis(sinopsisEnIngles) : "Sin sinopsis disponible.";
+        if (!nombre || !imagen_url || !capitulos || !anio_emision || !sinopsis || !estado) {
+            return res.status(400).json({ error: "Todos los campos son obligatorios" });
         }
 
-        // Ahora sí insertas en la base de datos con sinopsisFinal
-        const [result] = await pool.query(
-            'INSERT INTO animes (nombre, imagen_url, capitulos, anio_emision, sinopsis, estado) VALUES (?, ?, ?, ?, ?, ?)',
-            [nombre, imagen_url, capitulos, anio_emision, sinopsisFinal, estado]
-        );
+        try {
+            const [result] = await pool.query(
+                'INSERT INTO animes (nombre, imagen_url, capitulos, anio_emision, sinopsis, estado) VALUES (?, ?, ?, ?, ?, ?)', 
+                [nombre, imagen_url, capitulos, anio_emision, sinopsis, estado]
+            );
 
-        res.json({ message: 'Anime agregado', id: result.insertId });
+            console.log("✅ Anime agregado con ID:", result.insertId);
+            res.json({ message: 'Anime agregado', id: result.insertId });
 
-    } catch (error) {
-        console.error("Error al agregar anime:", error);
-        res.status(500).json({ error: "Error en el servidor" });
-    }
+        } catch (error) {
+            console.error("🔥 Error en el servidor:", error);
+            res.status(500).json({ error: "Error en el servidor" });
+        }
     });
 
     // 🟢 Eliminar un anime por ID

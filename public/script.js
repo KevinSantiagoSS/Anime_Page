@@ -82,6 +82,7 @@ animeForm.addEventListener("submit", function(event) {
         imagen_url: document.getElementById("imagen_url").value,
         capitulos: document.getElementById("capitulos").value,
         anio_emision: document.getElementById("anio_emision").value,
+        sinopsis: document.getElementById("sinopsis").value,
         estado: document.getElementById("estado").value
     };
 
@@ -126,6 +127,7 @@ function buscarAnimePorNombre(nombre) {
             document.getElementById("imagen_url").value = anime.imagen_url || "";
             document.getElementById("capitulos").value = anime.capitulos || "";
             document.getElementById("anio_emision").value = anime.anio_emision || "";
+            document.getElementById("sinopsis").value = anime.sinopsis || "";
             document.getElementById("estado").value = anime.estado || "NO VISTO";
             animeForm.dataset.animeId = anime.id;
             document.querySelector(".submit-btn").textContent = "Actualizar";

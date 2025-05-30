@@ -271,12 +271,13 @@ header {
 }
 
 .anime-lista {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: 15px;
     padding: 10px;
     border-bottom: 1px solid #ccc;
     width: 100%;
+    align-items: start;
 }
 
 .anime-imagen {
@@ -284,19 +285,20 @@ header {
     height: auto;
     border-radius: 5px;
     object-fit: cover;
+    grid-row: span 2; /* Imagen ocupa toda la altura */
 }
 
 .anime-nombre {
     font-size: 1.2rem;
     font-weight: bold;
+    text-align: left;
+    margin-bottom: 2px; /* <-- Aquí ajustas la separación */
 }
 
 .anime-sinopsis {
     font-size: 0.85rem;
     font-style: italic;
-    color: #666;
-    margin-top: 4px;
-    padding: 0 5px;
+    color: #ffffff;
     text-align: justify;
 }
 

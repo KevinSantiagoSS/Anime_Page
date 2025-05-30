@@ -180,6 +180,7 @@ function mostrarAnimes(animes) {
         let imagen = document.createElement("img");
         imagen.src = anime.imagen_url;
         imagen.alt = anime.nombre;
+        imagen.sin = anime.sinopsis;
         imagen.classList.add("anime-imagen");
 
         if (anime.estado === "VISTO") {
@@ -190,8 +191,14 @@ function mostrarAnimes(animes) {
         nombre.textContent = anime.nombre;
         nombre.classList.add("anime-nombre");
 
+        // ✅ NUEVO: agregar sinopsis si existe
+        let sinopsis = document.createElement("p");
+        sinopsis.classList.add("anime-sinopsis");
+        sinopsis.textContent = anime.sinopsis || ""; // evita mostrar "undefined"
+
         animeDiv.appendChild(imagen);
         animeDiv.appendChild(nombre);
+        animeDiv.appendChild(sinopsis); // añadimos la sinopsis
         contenedor.appendChild(animeDiv);
     });
 }
@@ -316,6 +323,7 @@ function mostrarAnimeSeleccionado(anime) {
         <h3>${anime.nombre}</h3>
         <img src="${anime.imagen_url}" alt="${anime.nombre}" class="anime-imagen-seleccionado">
         <h3>${anime.capitulos}</h3>
+        <p class="anime-sinopsis">${anime.sinopsis || ""}</p>
     `;
     resultadoDiv.style.display = "block";
 }

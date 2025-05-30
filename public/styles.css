@@ -291,6 +291,14 @@ header {
     font-weight: bold;
 }
 
+.anime-sinopsis {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #666;
+    margin-top: 4px;
+    padding: 0 5px;
+    text-align: justify;
+}
 
 /* Sección de la ruleta */
 #seccion-ruleta {

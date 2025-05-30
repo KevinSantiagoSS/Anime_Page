@@ -57,16 +57,16 @@ module.exports = (pool) => {
     router.post('/animes', async (req, res) => {
         console.log("📢 [POST] Agregando un anime:", new Date().toISOString());
         
-        const { nombre, imagen_url, capitulos, anio_emision, estado } = req.body;
+        const { nombre, imagen_url, capitulos, anio_emision, sinopsis, estado } = req.body;
 
-        if (!nombre || !imagen_url || !capitulos || !anio_emision || !estado) {
+        if (!nombre || !imagen_url || !capitulos || !anio_emision || !sinopsis || !estado) {
             return res.status(400).json({ error: "Todos los campos son obligatorios" });
         }
 
         try {
             const [result] = await pool.query(
-                'INSERT INTO animes (nombre, imagen_url, capitulos, anio_emision, estado) VALUES (?, ?, ?, ?, ?)', 
-                [nombre, imagen_url, capitulos, anio_emision, estado]
+                'INSERT INTO animes (nombre, imagen_url, capitulos, anio_emision, sinopsis, estado) VALUES (?, ?, ?, ?, ?, ?)', 
+                [nombre, imagen_url, capitulos, anio_emision, sinopsis, estado]
             );
 
             console.log("✅ Anime agregado con ID:", result.insertId);
@@ -132,7 +132,7 @@ module.exports = (pool) => {
         console.log("📢 Se recibió una solicitud para actualizar un anime");
 
         const { id } = req.params;
-        let { nombre, imagen_url, capitulos, anio_emision, estado } = req.body;
+        let { nombre, imagen_url, capitulos, anio_emision, sinopsis, estado } = req.body;
 
         try {
             const [animeData] = await pool.query("SELECT * FROM animes WHERE id = ?", [id]);
@@ -147,11 +147,12 @@ module.exports = (pool) => {
             imagen_url = imagen_url ?? animeActual.imagen_url;
             capitulos = capitulos ?? animeActual.capitulos;
             anio_emision = anio_emision ?? animeActual.anio_emision;
+            sinopsis = sinopsis ?? animeActual.sinopsis;
             estado = estado ?? animeActual.estado;
 
             const [result] = await pool.query(
-                "UPDATE animes SET nombre = ?, imagen_url = ?, capitulos = ?, anio_emision = ?, estado = ? WHERE id = ?",
-                [nombre, imagen_url, capitulos, anio_emision, estado, id]
+                "UPDATE animes SET nombre = ?, imagen_url = ?, capitulos = ?, anio_emision = ?, sinopsis = ?, estado = ? WHERE id = ?",
+                [nombre, imagen_url, capitulos, anio_emision, sinopsis, estado, id]
             );
 
             if (result.affectedRows === 0) {

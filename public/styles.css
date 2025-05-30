@@ -289,14 +289,14 @@ header {
 }
 
 .anime-nombre {
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
     text-align: left;
     margin-bottom: 2px; /* <-- Aquí ajustas la separación */
 }
 
 .anime-sinopsis {
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-style: italic;
     color: #ffffff;
     text-align: justify;

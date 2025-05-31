@@ -330,6 +330,29 @@ function mostrarAnimeSeleccionado(anime) {
     resultadoDiv.style.display = "block";
 }
 
+// Suponiendo que tienes los datos del anime en un objeto
+function mostrarModal(anime) {
+    document.getElementById("modal-imagen").src = anime.imagen_url;
+    document.getElementById("modal-nombre").textContent = anime.nombre;
+    document.getElementById("modal-anio").textContent = anime.anio_emision || "Desconocido";
+    document.getElementById("modal-capitulos").textContent = anime.capitulos || "??";
+    document.getElementById("modal-sinopsis").textContent = anime.sinopsis || "Sin sinopsis disponible";
+
+    // Mostrar modal
+    document.getElementById("anime-modal").classList.remove("oculto");
+
+    // Cerrar modal
+    document.querySelector(".cerrar-modal").onclick = () => {
+        document.getElementById("anime-modal").classList.add("oculto");
+    };
+
+    // Agregar evento al botón cambiar estado
+    const btnEstado = document.getElementById("modal-estado-btn");
+    btnEstado.onclick = () => {
+        cambiarEstado(anime.id, anime.estado);
+    };
+}
+
 /*Document que permite la busqueda*/
 document.getElementById("buscador-anime").addEventListener("input", function () {
     const termino = this.value.toLowerCase();
@@ -361,8 +384,10 @@ document.getElementById("buscador-anime").addEventListener("input", function () 
             li.addEventListener("click", () => {
                 document.getElementById("buscador-anime").value = anime.nombre;
                 resultados.style.display = "none";
-                // Opcional: desplazar hacia el anime o mostrar su info
+
+                mostrarModal(anime); // <<-- Aquí llamamos la función que muestra el modal
             });
+
 
             resultados.appendChild(li);
         });

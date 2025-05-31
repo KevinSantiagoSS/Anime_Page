@@ -449,3 +449,114 @@ header {
         width: 100%;
     }
 }
+
+/*MODAL BASICO*/
+
+/*MODAL BASICO MEJORADO*/
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.oculto {
+  display: none;
+}
+
+.modal-contenido {
+  background: #000;               /* Fondo negro */
+  padding: 25px 30px;            /* Más espacio interno */
+  border-radius: 12px;
+  width: 95%;
+  max-width: 900px;              /* Más ancho que antes */
+  max-height: 90vh;
+  overflow-y: auto;              /* Scroll si contenido largo */
+  position: relative;
+  box-sizing: border-box;
+}
+
+.modal-body {
+  display: flex;
+  gap: 30px;                    /* Más espacio entre imagen y texto */
+  flex-wrap: wrap;
+}
+
+.modal-body img {
+  width: 220px;                 /* Imagen más grande */
+  max-height: 320px;            /* Altura máxima */
+  object-fit: cover;            /* Sin deformación */
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.modal-info {
+  flex: 1;
+  min-width: 250px;
+  color: #eee;                 /* Texto claro para fondo negro */
+}
+
+/* Título del anime */
+.modal-info h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.8rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Sinopsis */
+#modal-sinopsis {
+  font-size: 1rem;
+  color: #ccc;
+  text-align: justify;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+#modal-estado-btn {
+  padding: 10px 20px;              /* Más espacio interno */
+  background-color: #1976d2;       /* Azul principal */
+  color: white;                    /* Texto blanco */
+  border: none;                   /* Sin borde */
+  border-radius: 6px;              /* Bordes redondeados suaves */
+  font-size: 1rem;                 /* Tamaño de texto legible */
+  font-weight: 600;                /* Texto un poco más grueso */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(25, 118, 210, 0.4);  /* Sombra sutil */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#modal-estado-btn:hover {
+  background-color: #125ca1;       /* Azul más oscuro al hover */
+  transform: translateY(-2px);     /* Sube un poco */
+  box-shadow: 0 6px 10px rgba(18, 92, 161, 0.5);
+}
+
+#modal-estado-btn:active {
+  background-color: #0d436d;       /* Azul aún más oscuro al click */
+  transform: translateY(0);
+  box-shadow: 0 3px 5px rgba(13, 67, 109, 0.6);
+}
+
+/* Botón cerrar */
+.cerrar-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  color: #bbb;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.cerrar-modal:hover {
+  color: #fff;
+}

@@ -337,7 +337,7 @@ function mostrarModal(anime) {
     document.getElementById("modal-anio").textContent = anime.anio_emision || "Desconocido";
     document.getElementById("modal-capitulos").textContent = anime.capitulos || "??";
     document.getElementById("modal-sinopsis").textContent = anime.sinopsis || "Sin sinopsis disponible";
-    document.getElementById("modal-estadoActual").textContent = anime.estadoActual;
+    document.getElementById("modal-estado").textContent = anime.estado;
 
     // Mostrar modal
     document.getElementById("anime-modal").classList.remove("oculto");
